@@ -111,3 +111,11 @@ def test_MainWindow_annotate_jpg(qtbot):
 
     labelme.testing.assert_labelfile_sanity(out_file)
     shutil.rmtree(tmp_dir)
+
+@pytest.mark.gui
+def test_wrong_format_opn(qtbot):
+    img_file = osp.join(data_dir, "raw/2011_000004.jpeg")
+    win = labelme.app.MainWindow(filename=img_file)
+    qtbot.addWidget(win)
+    _win_show_and_wait_imageData(qtbot, win)
+    win.close()
