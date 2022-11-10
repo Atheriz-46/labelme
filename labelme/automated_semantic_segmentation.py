@@ -36,7 +36,7 @@ if __name__=='__main__':
         files = os.listdir(args.input_path)
         for file in files:
             if file.split('.')[-1] in ['jpg','jpeg','png']:
-                segmentation(os.path.join(args.input_path,file),os.path.join(args.output_path,file) if args.output_path is not None else os.path.join(args.output_path,'segmented_',file)
+                segmentation(os.path.join(args.input_path,file),os.path.join(args.output_path,file) if args.output_path is not None else os.path.join(args.output_path,'segmented_',file))
     else:
         segmentation(args.input_path,args.output_path)
         
