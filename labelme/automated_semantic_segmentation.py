@@ -4,10 +4,24 @@ from transformers import pipeline
 import numpy as np
 
 def color(c):
+    """Return a random RGB color
+
+    Args:
+        c (int): Just the segment number
+
+    Returns:
+        np.ndarray: a random color
+    """
     n = random.randint(0,16777215)
     r,g,b = n%256,(n//256)%256,(n//(2**16))%256
     return np.array([[[r,g,b]]]).astype(np.uint8)
 def segmentation(input_file_name, output_file_name = None):
+    """This function can segment the image and save the mask at output_file_name
+
+    Args:
+        input_file_name (str): Path to image
+        output_file_name (str, optional): Path to mask. Defaults to None.
+    """
     model = pipeline("image-segmentation")
     res = model(input_file_name)
     if output_file_name is None:

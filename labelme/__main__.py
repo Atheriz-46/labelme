@@ -107,11 +107,11 @@ def main():
         help="epsilon to find nearest vertex on canvas",
         default=argparse.SUPPRESS,
     )
-    parser.add_argument('-i','--input_path', type=str,
+    parser.add_argument('--input_path', type=str,
                         help='input path/dir for the images')
-    parser.add_argument('-o','--output_path', type=str,
+    parser.add_argument('--output_path', type=str,
                         help='output path/dir for the images',default = None)
-    parser.add_argument('-d', '--directory',action='store_true')
+    parser.add_argument( '--directory',action='store_true')
     parser.add_argument('--segmentation',action='store_true')
     args = parser.parse_args()
     if args.segmentation:
