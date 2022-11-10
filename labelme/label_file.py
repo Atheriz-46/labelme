@@ -63,6 +63,7 @@ class LabelFile(object):
                 format = "JPEG"
             else:
                 format = "PNG"
+            image_pil = image_pil.convert("RGB")
             image_pil.save(f, format=format)
             f.seek(0)
             return f.read()
