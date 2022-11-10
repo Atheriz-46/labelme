@@ -7,7 +7,7 @@ import pytest
 import labelme.app
 import labelme.config
 import labelme.testing
-
+from labelme.automated_semantic_segmentation import segmentation
 
 here = osp.dirname(osp.abspath(__file__))
 data_dir = osp.join(here, "data")
@@ -119,3 +119,8 @@ def test_wrong_format_opn(qtbot):
     qtbot.addWidget(win)
     _win_show_and_wait_imageData(qtbot, win)
     win.close()
+
+@pytest.mark.gui
+def test_semseg():
+    img_file = osp.join(data_dir, "raw/2011_000004.jpeg")
+    segmentation(img_file)
