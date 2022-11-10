@@ -15,7 +15,7 @@ from labelme.app import MainWindow
 from labelme.config import get_config
 from labelme.logger import logger
 from labelme.utils import newIcon
-
+from labelme.automated_semantic_segmentation import segmentation
 
 def main():
     parser = argparse.ArgumentParser()
@@ -107,7 +107,24 @@ def main():
         help="epsilon to find nearest vertex on canvas",
         default=argparse.SUPPRESS,
     )
+    parser.add_argument('-i','--input_path', type=str,
+                        help='input path/dir for the images')
+    parser.add_argument('-o','--output_path', type=str,
+                        help='output path/dir for the images',default = None)
+    parser.add_argument('-d', '--directory',action='store_true')
+    parser.add_argument('--segmentation',action='store_true')
     args = parser.parse_args()
+    if args.segmentation:
+        args = parser.parse_args()
+        if args.directory:
+            files = os.listdir(args.input_path)
+            for file in files:
+                if file.split('.')[-1] in ['jpg','jpeg','png']:
+                    segmentation(os.path.join(args.input_path,file),os.path.join(args.output_path,file) if args.output_path is not None else os.path.join(args.output_path,'segmented_',file))
+        else:
+            segmentation(args.input_path,args.output_path)
+        sys.exit(0)
+
 
     if args.version:
         print("{0} {1}".format(__appname__, __version__))
